@@ -1,0 +1,31 @@
+Napravila sam sledeci jedinicni test:
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class CalculatorTest {
+
+    @Test
+    public void testAddition() {
+        // Ulazni izraz za testiranje
+        String expression = "2+3";
+        // Očekivani rezultat
+        String expected = "5.0";
+        // Pokretanje metode Run klase Calculator sa datim izrazom
+        String result = Calculator.Run(expression);
+        // Provera da li je dobijeni rezultat jednak očekivanom
+        Assertions.assertEquals(expected, result, "Addition result should be 5.0");
+    }
+}
+
+
+Takodje ovo su moja zapazanja nakon testa:
+
+Metod Operations.ToString(): Ime metode ToString bi trebalo promeniti jer se u Javi toString() koristi kao ugrađeni metod za vraćanje string reprezentacije objekta. Preporučljivo je koristiti drugačiji naziv da bi se izbegla konfuzija.
+
+Greška u deljenju sa nulom: Kako kod trenutno stoji, nije jasno kako se postupa sa deljenjem sa nulom. U Javi, deljenje sa nulom kada se radi sa float ili double tipovima rezultira Infinity ili NaN, ali to može dovesti do neželjenih rezultata bez eksplicitne provere i obrade ovakvih slučajeva.
+
+Preciznost float tipa: Korišćenje float tipa može dovesti do problema sa preciznošću, posebno pri radu sa veoma velikim ili malim brojevima, ili kod složenih aritmetičkih operacija. Možda bi bilo bolje koristiti double za veću preciznost.
+
+Greška pri parsiranju: Ako korisnik unese nešto što nije broj ili ako se desi neki drugi problem prilikom parsiranja stringova u brojeve, program vraća "ERROR". To je očekivano ponašanje, ali uvek postoji prostor za detaljnije obavljanje grešaka (npr., specifičnije poruke o grešci).
+
+Nedostatak provere za prazan ili nevažeći izraz: Ako se funkciji Run prosledi prazan string ili string koji ne sadrži validne brojeve/operatore, to može dovesti do IndexOutOfBoundsException ili drugih grešaka prilikom izvođenja.
